@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Halaman Utama</title>
+    <link rel="icon" href="asset/logo.png" />
+
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <!-- Bootstrap Icons for social media icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      .navbar .btn {
+        background: none;
+        border: none;
+        color: #000000;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+      .navbar .btn:hover,
+      .navbar .btn:focus {
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+        border-radius: 6px;
+      }
+      .navbar.custom-header-style {
+        background-color: white;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        padding: 12px 30px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        font-weight: bold;
+      }
+      .navbar.custom-header-style .brand {
+        display: flex;
+        align-items: center;
+      }
+      .navbar.custom-header-style .brand img {
+        height: 40px;
+        margin-right: 10px;
+      }
+      .offcanvas-header {
+        padding-bottom: 0.25rem;
+        padding-left: 2rem;
+        padding-top: 2rem;
+      }
+      .offcanvas-body {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        padding-left: 2rem;
+      }
+      .offcanvas .bi-chevron-down {
+        transition: transform 0.3s ease;
+        font-size: 0.9rem;
+      }
+      .offcanvas .nav-link {
+        color: #000;
+        font-weight: bold;
+        transition: all 0.3s ease-in-out;
+        border-radius: 0.375rem;
+        padding: 0.5rem 0.75rem;
+      }
+      .offcanvas .nav-link:hover {
+        background-color: #ffffff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transform: scale(1);
+        font-weight: 500;
+        color: #000;
+      }
+      body {
+        overflow-x: hidden;
+      }
+      body,
+      html {
+        height: 100%;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: #f9f9f9;
+        scroll-behavior: smooth;
+      }
+      h2,
+      h4,
+      h6 {
+        font-weight: bold;
+      }
+      #main-content {
+        padding: 1.5rem;
+        transition: margin-left 0.3s ease;
+      }
+      .hero-section {
+        background-image: url("asset/mahasiswa1.jpg");
+        background-size: cover;
+        background-position: center;
+        height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 75px;
+        margin-bottom: 2rem;
+        border-radius: 16px;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+        color: white;
+        text-align: center;
+        padding: 2rem;
+        backdrop-filter: brightness(0.7);
+      }
+      .hero-section h1 {
+        font-weight: 700;
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+      }
+      .hero-section p {
+        font-size: 1.5rem;
+        font-weight: 400;
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+      }
+      .hero-login-btn {
+        font-weight: bold;
+        font-size: 1.1rem;
+        padding: 0.8rem 1.2rem;
+        border-radius: 0.6rem;
+        transition: box-shadow 0.3s ease, background-color 0.3s ease,
+          transform 0.2s ease;
+      }
+      .hero-login-btn:hover {
+        background-color: #0067d5;
+        box-shadow: 0 6px 16px rgba(0, 64, 133, 0.6);
+        transform: translateY(-1px);
+      }
+      .about-box {
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        padding: 2.5rem;
+        gap: 2rem;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
+      .about-box img {
+        max-height: 250px;
+        object-fit: cover;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      }
+      .about-box div {
+        padding-left: 1rem;
+        flex: 1;
+      }
+      .about-box h2 {
+        margin-bottom: 1rem;
+      }
+      #info-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        justify-content: center;
+      }
+      .info-card {
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+        overflow: hidden;
+        width: 290px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .info-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
+      }
+      .info-card img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+      }
+      .info-content {
+        padding: 1rem 1.4rem;
+      }
+      .info-content h5 {
+        font-weight: bold;
+        margin-bottom: 1rem;
+        color: #000000;
+      }
+      .badge {
+        font-weight: bold;
+        font-size: 0.85rem;
+        border-radius: 12px;
+      }
+      footer {
+        background-color: rgba(0, 0, 0, 0.948);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        color: white;
+        width: 100%;
+        padding: 25px 30px;
+        font-size: 14px;
+      }
+      footer a {
+        color: #ffc107;
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav
+      class="navbar navbar-expand-lg navbar-light fixed-top custom-header-style"
+    >
+      <div class="container-fluid">
+        <div class="brand">
+          <img src="asset/logo.png" alt="Logo" />
+          <a class="navbar-brand fw-bold m-0" href="index.html">Langkara</a>
+        </div>
+        <button
+          class="btn d-lg-none"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasTop"
+          aria-controls="offcanvasTop"
+        >
+          ☰
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end">
+          <div class="d-flex flex-wrap gap-2">
+            <a href="#" class="btn fw-bold" id="btnDasbor">Dasbor</a>
+            <a href="#tentang" class="btn fw-bold">Tentang</a>
+            <a href="#informasi" class="btn fw-bold">Informasi</a>
+            <a href="#kontak" class="btn fw-bold">Kontak</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- Navbar -->
+
+    <!-- Offcanvas -->
+    <div
+      class="offcanvas offcanvas-top"
+      tabindex="-1"
+      id="offcanvasTop"
+      aria-labelledby="offcanvasTopLabel"
+    >
+      <div class="offcanvas-header">
+        <h4 id="offcanvasTopLabel">Navigasi</h4>
+        <button
+          type="button"
+          class="btn-close text-reset"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <div id="accordionMenu">
+          <ul class="nav flex-column px-2 mb-2">
+            <li class="nav-item">
+              <a href="login.html" class="nav-link">Dasbor</a>
+            </li>
+            <li class="nav-item">
+              <a href="#tentang" class="nav-link">Tentang</a>
+            </li>
+            <li class="nav-item">
+              <a href="#informasi" class="nav-link">Informasi</a>
+            </li>
+            <li class="nav-item">
+              <a href="#kontak" class="nav-link">Kontak</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Offcanvas -->
+
+    <!-- Main Content -->
+    <div id="main-content">
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div>
+          <h1>Selamat Datang di Platform Edukasi</h1>
+          <p>
+            Platform e-learning Kampus Langkara untuk belajar mudah, fleksibel,
+            dan terintegrasi.
+          </p>
+          <a href="login.html" class="btn btn-primary hero-login-btn mt-3"
+            >Masuk</a
+          >
+        </div>
+      </section>
+      <!-- Hero Section -->
+
+      <!-- About -->
+      <section class="about-box d-flex flex-column flex-sm-row" id="tentang">
+        <img
+          src="asset/standford.jpg"
+          alt="Tentang kampus"
+          class="img-fluid rounded shadow mb-3 mb-sm-0"
+        />
+        <div>
+          <h2>Tentang Platform Ini</h2>
+          <p>
+            Langkara adalah platform e-learning resmi Kampus Langkara yang
+            mendukung kegiatan belajar mengajar secara digital. Melalui platform
+            ini, mahasiswa dan dosen dapat mengakses materi perkuliahan,
+            mengerjakan tugas, dan mengikuti pembelajaran yang berlangsung.
+            <br />
+          </p>
+          <p>
+            Langkara dirancang untuk menunjang pembelajaran yang modern dan
+            interaktif, Langkara menjadi jembatan antara metode pembelajaran
+            konvensional dan digital. Dengan semangat inovasi, kami berkomitmen
+            menciptakan ekosistem akademik yang adaptif, inklusif, dan sesuai
+            dengan perkembangan teknologi pendidikan.
+          </p>
+        </div>
+      </section>
+      <!-- About -->
+
+      <!-- Information -->
+      <section>
+        <h2 id="informasi" class="mb-4 text-center">Informasi Terbaru</h2>
+        <div id="info-list">
+          <!-- Card 1 -->
+          <div class="info-card">
+            <img src="asset/info1.jpg" alt="Webinar Coding" />
+            <div class="info-content">
+              <h5>Pendaftaran Mahasiswa Baru Telah Dibuka!</h5>
+              <span class="badge bg-success mb-2"
+                >Batas Daftar: 31 Juli 2025</span
+              >
+              <p>
+                Segera daftarkan dirimu untuk tahun ajaran baru di Lengkara!
+                Kesempatan terbatas hanya untuk gelombang pertama.
+              </p>
+              <a href="#" class="text-primary fw-bold d-block"
+                >Daftar Sekarang</a
+              >
+            </div>
+          </div>
+          <!-- Card 2 -->
+          <div class="info-card">
+            <img src="asset/info2.jpg" alt="Webinar Coding" />
+            <div class="info-content">
+              <h5>Open House Langkara 2025</h5>
+              <span class="badge bg-warning mb-2"
+                >Batas Daftar: 26 Juni 2025</span
+              >
+              <p>
+                Kunjungi kampus, ikuti tur gedung & sesi kenalan bareng dosen
+                dan mahasiswa aktif. Daftarkan dirimu sekarang!.
+              </p>
+              <a href="#" class="text-primary fw-bold d-block"
+                >Daftar Sekarang</a
+              >
+            </div>
+          </div>
+          <!-- Card 3 -->
+          <div class="info-card">
+            <img src="asset/info3.jpg" alt="Seminar" />
+            <div class="info-content">
+              <h5>
+                Ngobrol Bareng Alumni: Pengalaman Jadi Programmer di Luar Negeri
+              </h5>
+              <span class="badge bg-info text-dark mb-2"
+                >Batas Daftar: 12 Juli 2025</span
+              >
+              <p>
+                Belajar langsung dari alumni IT yang kini berkarier di
+                perusahaan teknologi dunia.
+              </p>
+              <a href="#" class="text-primary fw-bold d-block"
+                >Daftar Sekarang</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- Main Content -->
+
+    <!-- Footer -->
+    <footer class="mt-auto">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- Tentang Kami -->
+          <div class="col-md-4 mb-3">
+            <h6>TENTANG KAMI</h6>
+            <p>
+              Kami adalah platform edukasi digital yang menyediakan akses
+              informasi terkini Universitas Langkara.
+            </p>
+          </div>
+          <!-- Kontak -->
+          <div class="col-md-4 mb-3" id="kontak">
+            <h6>KONTAK</h6>
+            <p>
+              <a href="mailto:LangkaraIdn@gmail.com"
+                >Email: info@LangkaraIdn.ac.id</a
+              ><br />
+              <a href="https://wa.me/628117002638"></a>Telp: 08117002638<br />
+              Alamat: Jl. Ali Haji No. 90, Tanjungpinang, Kepri 29125
+            </p>
+          </div>
+          <!-- Social Media -->
+          <div class="col-md-4 mb-3">
+            <h6>IKUTI KAMI</h6>
+            <a href="https://facebook.com" target="_blank" class="me-3"
+              ><i class="bi bi-facebook fs-5"></i
+            ></a>
+            <a href="https://instagram.com" target="_blank" class="me-3"
+              ><i class="bi bi-instagram fs-5"></i
+            ></a>
+            <a href="https://tiktok.com" target="_blank" class="me-3"
+              ><i class="bi bi-tiktok fs-5"></i
+            ></a>
+          </div>
+        </div>
+        <hr class="bg-light" />
+        <div class="text-center">
+          &copy; 2025 Langkara. All rights reserved.
+        </div>
+      </div>
+    </footer>
+    <!-- Footer -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const dasborBtn = document.getElementById("btnDasbor");
+
+        dasborBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+          const userEmail = localStorage.getItem("userEmail");
+
+          if (isLoggedIn && userEmail) {
+            if (userEmail === "carin@langkara.ac.id") {
+              window.location.href = "dashboardcarin.html";
+            } else if (userEmail === "wellyna@langkara.ac.id") {
+              window.location.href = "dashboardwellyna.html";
+            } else {
+              alert("Email tidak dikenali. Akses ditolak.");
+            }
+          } else {
+            alert("Anda belum login. Silakan login terlebih dahulu.");
+          }
+        });
+      });
+    </script>
+    <script>
+      function handleLogout() {
+        localStorage.clear(); // Hapus status login
+        window.location.href = "index.html"; // Balik ke halaman utama (fresh)
+      }
+    </script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

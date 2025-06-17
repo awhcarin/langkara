@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Pemrograman 2</title>
+    <link rel="icon" href="asset projek/logo.png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
+
+    <!-- Bootstrap Icons for social media icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet"/>
+
+    <style>
+      .navbar .btn {
+        background: none;
+        border: none;
+        color: #000000;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+      .navbar .btn:hover,
+      .navbar .btn:focus,
+      .navbar .btn:active,
+      .navbar .dropdown-toggle:hover,
+      .navbar .dropdown-toggle:focus,
+      .navbar .dropdown-toggle:active {
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+        border-radius: 6px;
+      }
+      .navbar.custom-header-style {
+        background-color: white;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        padding: 12px 30px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        font-weight: bold;
+      }
+      .navbar.custom-header-style .brand {
+        display: flex;
+        align-items: center;
+      }
+      .navbar.custom-header-style .brand img {
+        height: 40px;
+        margin-right: 10px;
+      }
+      .dropdown:hover .dropdown-menu {
+        display: block;
+        margin-top: 0;
+      }
+      .offcanvas-header {
+        padding-bottom: 0.25rem;
+        padding-left: 2rem;
+        padding-top: 2rem;
+      }
+      .offcanvas-body {
+        padding-top: 0.5rem; 
+        padding-bottom: 0.5rem;
+        padding-left: 2rem;
+      }
+      .offcanvas .bi-chevron-down {
+        transition: transform 0.3s ease;
+        font-size: 0.9rem;
+      }
+      .offcanvas .nav-link {
+        color: #000000;
+        font-weight: bold;
+        transition: all 0.3s ease-in-out;
+        border-radius: 0.375rem;
+        padding: 0.5rem 0.75rem;
+      }
+      .offcanvas .nav-link:hover {
+        background-color: #ffffff; 
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transform: scale(1); 
+        font-weight: 500; 
+        color: #000; 
+      }   
+      body {
+        overflow-x: hidden;
+        padding-top: 100px;
+      }
+      body,
+      html {
+        height: 100%;
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: #f9f9f9;
+      }
+      h4, h5, h6{
+        font-weight: bold;
+      }
+      .card {
+        border-radius: 1.25rem !important; 
+        border: 1px solid #dee2e6 !important; 
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+      }
+      .card-body {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        position: relative;
+        padding-bottom: 3rem;
+      }
+      .card-body > .status-badge {
+        position: absolute;
+        bottom: 1rem;
+        left: 1rem;
+        right: 1rem;
+        text-align: center;
+        font-weight: 600;
+        padding: 0.35rem 0.75rem;
+        border-radius: 1.5rem;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      }
+      /* Status warna */
+      .status-badge.sudah {
+        background-color: #d1e7dd;
+        color: #0f5132;
+      }
+      .status-badge.belum {
+        background-color: #f8d7da;
+        color: #842029;
+      }
+      .hover-shadow:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+        transform: translateY(-2px);
+      }
+      .col-anggota {
+        border-radius: 1rem;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
+        background-color: #fff;
+        padding: 1rem;
+      }
+      .anggota-item {
+        border-radius: 0.75rem;
+        padding: 0.5rem, 1rem;
+        background-color: #f8f9fa;
+        transition: box-shadow 0.3s ease, transform 0.2s ease, background-color 0.3s ease;
+        cursor: pointer;
+        box-shadow: none;
+        user-select: none;
+      }
+      .anggota-item:hover {
+        background-color: #e9ecef;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 1);
+        transform: translateY(-2px);
+      }
+      footer {
+        background-color: rgba(0, 0, 0, 0.948);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        color: white;
+        width: 100%;
+        padding: 25px 30px;
+        font-size: 14px;
+      }
+      footer a {
+        color: #ffc107;
+        text-decoration: underline;
+      }       
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top custom-header-style">
+      <div class="container-fluid">
+        <div class="brand">
+          <img src="asset/logo.png" alt="Logo"/>
+          <a class="navbar-brand fw-bold m-0" href="index.html">Langkara</a>
+        </div>
+        <button class="btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+          ☰
+        </button>
+        <div class="collapse navbar-collapse justify-content-end">
+          <div class="d-flex flex-wrap gap-2">
+            <a id="dashboardLink" class="btn fw-bold" href="#">Dasbor</a>
+             <button class="btn position-relative fw-bold" data-bs-toggle="modal" data-bs-target="#modalPengumuman">
+              Pengumuman
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                3
+                <span class="visually-hidden">pengumuman belum dibaca</span>
+              </span>
+            </button>
+            <div class="dropdown">
+              <button class="btn dropdown-toggle fw-bold" type="button" id="dropdownMenuClickableInside" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                Kelas
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuClickableInside" style="width: auto;">
+                <li><a class="dropdown-item" href="kelas1.html">Struktur Data</a></li>
+                <hr class="dropdown-divider">
+                <li><a class="dropdown-item" href="kelas2.html">Bank dan Lembaga Keuangan</a></li>
+                <hr class="dropdown-divider">
+                <li><a class="dropdown-item" href="kelas3.html">Dasar Akuntansi 2</a></li> 
+                <hr class="dropdown-divider">
+                <li><a class="dropdown-item" href="kelas4.html">Pemrograman 2</a></li>
+                <hr class="dropdown-divider">
+                <li><a class="dropdown-item" href="kelas5.html">Akuntansi Biaya 1</a></li>
+                <hr class="dropdown-divider">
+                <li><a class="dropdown-item" href="kelas6.html">Arsitektur Sistem Informasi</a></li>
+                <hr class="dropdown-divider">
+                <li><a class="dropdown-item" href="kelas7.html">Bahasa Asing 1</a></li>
+              </ul>
+            </div>
+            <a href="#kontak" class="btn fw-bold">Kontak</a>
+            <div class="dropdown">
+              <button class="btn dropdown-toggle fw-bold" type="button" id="dropdownMenuClickableInside" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                Pengaturan
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuClickableInside" style="width: fit-content;">
+                <li>
+                  <a id="profilLink" class="dropdown-item" href="#">Profil</a>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                  <a href="#" onclick="handleLogout()" class="dropdown-item text-danger">Keluar</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- Navbar -->
+
+    <!-- Offcanvas -->
+   <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+      <div class="offcanvas-header">
+        <h4 id="offcanvasTopLabel">Navigasi</h4>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div id="accordionMenu">
+            <ul class="nav flex-column px-2">
+              <li class="nav-item"></li><a id="dashboardLink" class="btn fw-bold" href="#">Dasbor</a></li>
+              <li class="nav-item"><a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#modalPengumuman" data-bs-dismiss="offcanvas">Pengumuman</a></li>
+              <li class="nav-item">
+                <a class="nav-link d-flex justify-content-start align-items-center gap-1" data-bs-toggle="collapse" href="#kelasDropdown" role="button" aria-expanded="false" aria-controls="customizeDropdown">
+                  <span> Kelas</span>
+                  <i class="bi bi-chevron-down"></i> <!-- Bootstrap Icons -->
+                </a>
+                <div class="collapse ps-4 fw-normal" id="kelasDropdown" data-bs-parent="#accordionMenu">
+                  <a href="kelas1.html" class="nav-link">Struktur Data</a>
+                  <a href="kelas2.html" class="nav-link">Bank dan Lembaga Keuangan</a>
+                  <a href="kelas3.html" class="nav-link">Dasar Akuntansi 2</a>
+                  <a href="kelas4.html" class="nav-link">Pemrograman 2</a>
+                  <a href="kelas5.html" class="nav-link">Akuntansi Biaya 1</a>
+                  <a href="kelas6.html" class="nav-link">Arsitektur Sistem Informasi</a>
+                  <a href="kelas7.html" class="nav-link">Bahasa Asing 1</a>
+                </div>
+              <li class="nav-item"><a href="#kontak" class="nav-link">Kontak</a></li>
+              <li class="nav-item">
+                <a class="nav-link d-flex justify-content-start align-items-center gap-1" data-bs-toggle="collapse" href="#pengaturanDropdown" role="button" aria-expanded="false" aria-controls="customizeDropdown">
+                  <span>Pengaturan</span>
+                  <i class="bi bi-chevron-down"></i> <!-- Bootstrap Icons -->
+                </a>
+                <div class="collapse ps-4 fw-normal" id="pengaturanDropdown" data-bs-parent="#accordionMenu">
+                  <li>
+                  <a id="profilLink" class="dropdown-item" href="#">Profil</a>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                  <a href="#" onclick="handleLogout()" class="dropdown-item text-danger">Keluar</a>
+                </li>
+              </li>
+            </ul>
+          </div>
+      </div>
+    </div>
+    <!-- Offcanvas -->
+
+    <!-- Header Mata Kuliah -->
+    <div class="container">
+      <div class="card shadow-sm rounded p-3 mb-4 hover-shadow border-0">
+        <h5 class="text-dark mb-2">Pemrograman 2</h5>
+        <p class="mb-1">Bapak Aggry Saputra</p>
+        <p class="mb-0"><strong>Jadwal:</strong> 
+          <span class="badge bg-success text-light">Kamis, 08:00 - 10:30</span>
+        </p>
+      </div>
+    </div>
+     <!-- Header Mata Kuliah -->
+
+    <!-- Main Content -->
+    <main class="container pt-3">
+      <div class="row g-3">
+       <!-- Daftar Tugas -->
+        <div class="col-md-8" id="tugas">
+          <div class="section-box mb-4 shadow-sm">
+            <h4 class="mb-3">📌 Daftar Tugas</h4>
+            <div class="row g-3">
+              <!-- Tugas 1 -->
+              <div class="col-md-12">
+                <div class="card bg-dark text-white shadow-sm p-3 h-100" style="border-left: 5px solid #198754;">
+                  <div class="mb-2">
+                    <h5 class="mb-1">Tugas HTML dan CSS</h5>
+                    <span class="badge bg-success">WebProfile.html</span><br>
+                    <span class="badge bg-success">WebProfile.css</span><br>
+                    <small class="text-success">✔️ Terkumpul</small>
+                  </div>
+                  <p class="mb-2"><strong>Deadline:</strong> 17 April 2025</p>
+                  <div class="mt-auto text-end">
+                    <button class="btn btn-success btn-sm rounded-pill disabled">
+                      <i class="bi bi-check-circle"></i> Sudah Dikirim
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tugas 2 -->
+               <div class="col-md-12">
+                <div class="card bg-dark text-white shadow-sm p-3 h-100" style="border-left: 5px solid #dc3545;">
+                  <div class="mb-2">
+                    <h5 class="mb-1">Tugas Project UAS</h5>
+                    <small class="text-warning">Belum Dikumpulkan</small>
+                  </div>
+                  <!-- File yang sudah diupload -->
+                  <p class="mb-1">Buatlah Web bertemakan EduTech.</p>
+                  <p class="mb-2"><strong>Deadline:</strong> 18 Juni 2025</p>
+                  <div class="mt-auto text-end">
+                    <button class="btn btn-outline-light btn-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#uploadModal">
+                      <i class="bi bi-upload"></i> Upload Tugas
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Daftar Tugas -->
+
+        <!-- Modal Upload Tugas -->
+        <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content shadow">
+              <div class="modal-header">
+                <h6 class="modal-title" id="uploadModalLabel">Upload Tugas</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="mb-2">
+                    <label for="taskFilePicker" class="form-label">Pilih File</label>
+                    <input type="file" class="form-control form-control-sm" id="taskFilePicker">
+                  </div>
+                  <div class="mb-2">
+                    <label for="fileNameInput" class="form-label">Nama File</label>
+                    <input type="text" class="form-control form-control-sm" id="fileNameInput" placeholder="Contoh: tugas1.cpp">
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-sm w-100">Unggah</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal Upload Tugas -->
+
+        <!-- Bagian anggota: -->
+        <div class="col-md-4" id="anggota">
+          <div class="col-anggota mt-2 mx-3">
+            <h6 class="text-center mb-3">👥 Peserta Kelas</h6>
+            <div class="anggota-list d-flex flex-column gap-2">
+              <div class="anggota-item d-flex align-items-center gap-2">
+                <i class="bi bi-person-circle fs-4 text-success"></i>
+                <div class="anggota-nama" title="Putri Nanda Carina">Putri Nanda Carina</div>
+              </div>
+              <div class="anggota-item d-flex align-items-center gap-2">
+                <i class="bi bi-person-circle fs-4 text-primary"></i>
+                <div class="anggota-nama" title="Wellyna">Wellyna</div>
+              </div>
+              <div class="anggota-item d-flex align-items-center gap-2">
+                <i class="bi bi-person-circle fs-4 text-success"></i>
+                <div class="anggota-nama" title="Lily Muni">Lily Muni</div>
+              </div>
+              <div class="anggota-item d-flex align-items-center gap-2">
+                <i class="bi bi-person-circle fs-4 text-primary"></i>
+                <div class="anggota-nama" title="Viviyani Yang">Viviyani Yang</div>
+              </div>
+              <div class="anggota-item d-flex align-items-center gap-2">
+                <i class="bi bi-person-circle fs-4 text-success"></i>
+                <div class="anggota-nama" title="Louis Patridge">Louis Patridge</div>
+              </div>
+              <div class="anggota-item d-flex align-items-center gap-2">
+                <i class="bi bi-person-circle fs-4 text-primary"></i>
+                <div class="anggota-nama" title="Gracie Widjaja">Gracie Widjaja</div>
+              </div>
+              <div class="anggota-item d-flex align-items-center gap-2">
+                <i class="bi bi-person-circle fs-4 text-success"></i>
+                <div class="anggota-nama" title="Felis Carista">Felis Carista</div>
+              </div>
+              <div class="anggota-item d-flex align-items-center gap-2">
+                <i class="bi bi-person-circle fs-4 text-primary"></i>
+                <div class="anggota-nama" title="Rhun Aditama">Rhun Aditama</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Bagian anggota: -->
+   
+      <!-- Materi -->
+      <div class="section-box mt-4 rounded bg-light" id="materi">
+        <h4 class="mb-3">📚 Materi Pembelajaran</h4>
+        <div class="row g-3">
+          <div class="col-md-12">
+            <!-- Materi List -->
+            <div class="card shadow-sm mb-3">
+              <div class="card-body">
+                <h6 class="mb-1">Materi HTML</h6>
+                <small class="text-muted">3 April 2025</small>
+                <div class="mt-2">
+                  <span class="badge bg-success">📄MateriHTML.pdf</span><br>                
+                </div>
+              </div>
+            </div>
+            <div class="card shadow-sm mb-4">
+              <div class="card-body">
+                <h6 class="mb-1">Materi CSS</h6>
+                <small class="text-muted">22 Mei 2025</small>
+                <div class="mt-2">
+                  <span class="badge bg-success">📄MateriCSS.pdf</span><br>                
+                </div>
+              </div>     
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Materi -->
+    </main>
+    <!-- Main Content -->
+
+    <!-- Footer -->
+    <footer class="mt-auto">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- Tentang Kami -->
+          <div class="col-md-4 mb-3">
+            <h6>TENTANG KAMI</h6>
+            <p>Kami adalah platform edukasi digital yang menyediakan akses
+              informasi terkini Universitas Langkara.</p>
+          </div>
+          <!-- Kontak -->
+          <div class="col-md-4 mb-3" id="kontak">
+            <h6>KONTAK</h6>
+            <p>
+              <a href="mailto:LangkaraIdn@gmail.com">Email: LangkaraIdn.ac.id</a><br>
+              <a href="https://wa.me/628117002638"></a>Telp: 08117002638<br>
+              Alamat: Jl. Ali Haji  No. 90, Tanjungpinang, Kepri 29125
+            </p>
+          </div>
+          <!-- Social Media -->
+          <div class="col-md-4 mb-3">
+            <h6>IKUTI KAMI</h6>
+            <a href="https://facebook.com" target="_blank" class="me-3"><i class="bi bi-facebook fs-5"></i></a>
+            <a href="https://instagram.com" target="_blank" class="me-3"><i class="bi bi-instagram fs-5"></i></a>
+            <a href="https://tiktok.com" target="_blank" class="me-3"><i class="bi bi-tiktok fs-5"></i></a>
+          </div>
+        </div>
+        <hr class="bg-light">
+        <div class="text-center">
+          &copy; 2025 Langkara. All rights reserved.
+        </div>
+      </div>
+    </footer>
+    <!-- Footer -->
+
+    <!-- Modal Pengumuman -->
+    <div class="modal fade" id="modalPengumuman" tabindex="-1" aria-labelledby="modalPengumumanLabel" aria-hidden="true">
+      <div class="modal-dialog  modal-dialog-centered custom-modal-size">
+        <div class="modal-content rounded-3-shadow">
+          <div class="modal-header bg-light text-dark">
+            <h5 class="modal-title" id="modalPengumumanLabel">📢 Pengumuman</h5>
+            <button type="button" class="btn-close btn-close-" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+
+            <!-- 1-->
+            <div class="mb-3">
+              <h6 class="d-flex align-items-center gap-2">
+              📚 Bank dan Lembaga Keuangan
+              </h6>
+              <small class="text-muted">Selasa, 3 Juni 2025</small>
+              <p class="mb-1">Tugas Otoritas Moneter dan Jasa Keuangan</p>
+              <i class="bi bi-alarm-fill text-danger fw-bold"> Selasa, 10 Juni 2025</i>
+              <hr class="border-3 opacity-100">
+            </div>
+            <!-- 2 -->
+            <div class="mb-3">
+              <h6 class="d-flex align-items-center gap-2">
+              📚 Pemrograman 2
+              </h6>
+              <small class="text-muted">Jumat, 15 Mei 2025</small>
+              <p class="mb-1">Tugas Project UAS</p>
+              <i class="bi bi-alarm-fill text-danger fw-bold"> Jumat, 18 Juni 2025</i>
+              <hr class="border-3 opacity-100">
+            </div>
+            <!-- 3 -->
+            <div class="mb-3">
+              <h6 class="d-flex align-items-center gap-2">
+              📚 Bahasa Asing 1
+              </h6>
+              <small class="text-muted">Jumat, 13 Juni 2025</small>
+              <p class="mb-1">Tugas Project Video Kelompok</p>
+              <i class="bi bi-alarm-fill text-danger fw-bold"> Jumat, 20 Juni 2025</i>
+              <hr class="border-3 opacity-100">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Pengumuman -->
+    <script>
+      const user = localStorage.getItem("username");
+
+      const dashboardLink = document.getElementById("dashboardLink");
+      const profilLink = document.getElementById("profilLink");
+
+      if (user === "carin") {
+        if (dashboardLink) dashboardLink.href = "dashboardcarin.html";
+        if (profilLink) profilLink.href = "profil-carin.html";
+      } else if (user === "wellyna") {
+        if (dashboardLink) dashboardLink.href = "dashboardwellyna.html";
+        if (profilLink) profilLink.href = "profil-wellyna.html";
+      } else {
+        if (dashboardLink) dashboardLink.href = "login.html";
+        if (profilLink) profilLink.href = "login.html";
+      }
+    </script>
+
+
+    <script>
+      const user = localStorage.getItem("username");
+      console.log("Logged in user:", user); 
+
+      const profileLink = document.getElementById("profilLink");
+      if (profileLink) {
+        if (user === "carin") {
+          profileLink.href = "profil-carin.html";
+        } else if (user === "wellyna") {
+          profileLink.href = "profil-wellyna.html";
+        } else {
+          profileLink.href = "login.html"; // fallback
+        }
+      }
+    </script>
+    <script>
+      function handleLogout() {
+      localStorage.clear(); // hapus status login
+      window.location.href = "login.html"; // redirect ke halaman awal
+      }
+    </script>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
